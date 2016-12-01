@@ -1,4 +1,5 @@
-
+create database IF NOT EXISTS si;
+use  si;
 CREATE TABLE IF NOT EXISTS production (
   idproduction int NOT NULL AUTO_INCREMENT,
   title VARCHAR(40) NOT NULL,
@@ -6,7 +7,7 @@ CREATE TABLE IF NOT EXISTS production (
   genre VARCHAR(200),
   released VARCHAR(100),
   runtime int,
-  plott VARCHAR(200),
+  plot VARCHAR(200),
   languaje varchar(20),
   type VARCHAR(20),
   totalSeason int,
@@ -14,37 +15,46 @@ CREATE TABLE IF NOT EXISTS production (
   PRIMARY KEY (idproduction) 
 );
 
-
-CREATE TABLE IF NOT EXISTS personsproduction (
+CREATE TABLE IF NOT EXISTS persons (
   idperson int NOT NULL AUTO_INCREMENT,
   name varchar(100),
   lastname varchar(100),
-  type varchar(100), 
+  PRIMARY KEY (idperson)
+);
+
+CREATE TABLE IF NOT EXISTS personsproduction (
+  idperson int NOT NULL,
   idproduction int NOT NULL, 
-  PRIMARY KEY (idperson),
-  FOREIGN KEY (idproduction) REFERENCES production(idproduction)
+  type varchar(100) NOT NULL,
+  PRIMARY KEY (idperson,idproduction,type)
 );
 
 
 CREATE TABLE IF NOT EXISTS user (
-  iduser int NOT NULL AUTO_INCREMENT,
+  email varchar(100) NOT NULL, 
   name varchar(100) NOT NULL,
-  lastname varchar(100) NOT NULL,
-  mail varchar(100) NOT NULL,  
-  PRIMARY KEY (iduser)  
+  lastname varchar(100) NOT NULL,   
+  password varchar(16) NOT NULL,
+  PRIMARY KEY (email)  
 );
+
+
+CREATE TABLE IF NOT EXISTS userAccess (
+  email varchar(100) NOT NULL,  
+  password varchar(16) NOT NULL,
+  user boolean NOT NULL,
+  employe boolean NOT NULL,
+  admin boolean NOT NULL,   
+  FOREIGN KEY (email) REFERENCES user(email)
+);
+
 
 CREATE TABLE IF NOT EXISTS vote (
   idvoto int NOT NULL AUTO_INCREMENT,
-  iduser int NOT NULL,
   idproduction int NOT NULL,
-  votes int NOT NULL,  
+  rating int NOT NULL,  
+  email varchar(100) NOT NULL,
   PRIMARY KEY (idvoto),
-  FOREIGN KEY (iduser) REFERENCES user(iduser),
+  FOREIGN KEY (email) REFERENCES user(email),
   FOREIGN KEY (idproduction) REFERENCES production(idproduction)
 );
-
-
-
-
-
