@@ -30,8 +30,7 @@ public class Production {
 	private int totalSeason;
 	private int episode;
 	
-	@ManyToMany(mappedBy="idProduction")
-	private Set<Project> projects = new HashSet<>();	
+		
 	public int getIdProduction() {
 		return idProduction;
 	}
@@ -117,18 +116,7 @@ public class Production {
 		this.episode = episode;
 	}
 
-	public Set<Project> getProjects() {
-		return projects;
-	}
-
-	public void setProjects(Set<Project> projects) {
-		this.projects = projects;
-	}
-
-	
-
-	
-	
+		
 	
 	
 }

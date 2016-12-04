@@ -17,32 +17,38 @@ public class Voto {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idVoto;	
-	private int idUser;
-	private int votacion;
 	
-		
-	@ManyToMany(mappedBy="voto")
-	private Set<Project> projects = new HashSet<>();
+	private int idproduction;
+	private int email;
+	private int rating;
 	
-	public void setVotacion(int votacion) {
-		this.votacion = votacion;
-	}
 	
-	public int getVotacion() {
-		return votacion;
-	}
-	
-	public void setIdUser(int idUser) {
-		this.idUser = idUser;
-	}
-	
-	public int getIdUser() {
-		return idUser;
-	}
-	
-	public int getId() {
+	public int getIdVoto() {
 		return idVoto;
 	}
+	
+	public int getIdproduction() {
+		return idproduction;
+	}
+	public void setIdproduction(int idproduction) {
+		this.idproduction = idproduction;
+	}
+	public int getEmail() {
+		return email;
+	}
+	public void setEmail(int email) {
+		this.email = email;
+	}
+	public int getRating() {
+		return rating;
+	}
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+	
+	
+		
+
 
 	
 }
