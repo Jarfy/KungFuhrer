@@ -1,6 +1,6 @@
 package sing.proyectosi;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,10 +18,10 @@ public class Production {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idProduction;	
-	private int title;
+	private String title;
 	private Date year;
 	private String genre;
-	private String release;
+	private String released;
 	private int runtime;
 	private String plot;
 	private String languaje;
@@ -36,11 +36,11 @@ public class Production {
 	}
 	
 	
-	public int getTitle() {
+	public String getTitle() {
 		return title;
 	}
 
-	public void setTitle(int title) {
+	public void setTitle(String title) {
 		this.title = title;
 	}
 
@@ -61,11 +61,11 @@ public class Production {
 	}
 
 	public String getRelease() {
-		return release;
+		return released;
 	}
 
 	public void setRelease(String release) {
-		this.release = release;
+		this.released = release;
 	}
 
 	public int getRuntime() {
