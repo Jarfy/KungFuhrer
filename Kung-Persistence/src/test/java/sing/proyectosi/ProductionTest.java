@@ -167,7 +167,7 @@ public class ProductionTest extends SQLBasedTest {
 		
 		assertEquals(0, rs.getInt("total"));
 	}
-	
+	/*
 	
 	@Test
 	public void testListProduction() throws SQLException {
@@ -225,6 +225,6 @@ public class ProductionTest extends SQLBasedTest {
 		assertEquals("prueba para listar 2", produc.get(1).getTitle());
 	}
 	
-	
+	*/
 
 }

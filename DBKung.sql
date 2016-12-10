@@ -1,3 +1,8 @@
+CREATE USER 'Kungfury'@'localhost' IDENTIFIED BY 'Kungpass';
+GRANT ALL PRIVILEGES ON si . * TO 'Kungfury'@'localhost';
+FLUSH PRIVILEGES;
+
+
 create database IF NOT EXISTS si;
 use  si;
 CREATE TABLE IF NOT EXISTS production (

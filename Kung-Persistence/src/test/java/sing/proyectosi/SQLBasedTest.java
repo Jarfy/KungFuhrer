@@ -12,8 +12,8 @@ public class SQLBasedTest {
 	
 	private static String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	private static final String DB_URL = "jdbc:mysql://localhost:3306/si";
-	private static final String USER = "siuser";
-	private static final String PASS = "sipass";
+	private static final String USER = "Kungfury";
+	private static final String PASS = "Kungpass";
 	
 	static {
 		try {
