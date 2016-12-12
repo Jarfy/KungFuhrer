@@ -1,23 +1,26 @@
 package sing.proyectosi;
 
-import java.util.Date;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import javax.persistence.Table;
 
 @Entity
+@Table(name="Production")
 public class Production {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="idproduction")
 	private int idProduction;	
 	private String title;
 	private Date year;

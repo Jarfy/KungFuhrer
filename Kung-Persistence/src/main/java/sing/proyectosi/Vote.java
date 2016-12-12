@@ -1,18 +1,15 @@
 package sing.proyectosi;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table; 
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne; 
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "vote")
 public class Vote {
 
 	@Id
@@ -23,9 +20,11 @@ public class Vote {
 	private int rating;
 	
 	@ManyToOne
+	@JoinColumn(name="email")
 	private User user;
 	
 	@ManyToOne
+	@JoinColumn(name="idproduction")
 	private Production production;
 	
 	//constructor

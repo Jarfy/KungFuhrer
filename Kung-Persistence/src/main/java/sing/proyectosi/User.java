@@ -1,21 +1,22 @@
 package sing.proyectosi;
 
-import java.util.Date;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="user")
 public class User {
 	
 	@Id
+	@Column(name = "email")
 	private String email; 
 	private String name;
 	private String lastName;
@@ -24,6 +25,8 @@ public class User {
 	@OneToMany
 	private Set<Vote> votes = new HashSet<>();
 
+	@OneToOne
+	private UserAccess userAccess;
 	
 	public String getEmail() {
 		return email;
