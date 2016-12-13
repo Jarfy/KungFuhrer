@@ -4,22 +4,24 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 
 @Entity
 @Table(name = "userAccess")
 public class UserAccess {
 
 	
-	@Column(name="email")
+	@Id
 	private String email;
+	
 	private String password;
-	private boolean userr;
+	private boolean defUser;
 	private boolean employee;
 	private boolean admin;
 	
 	
-	@OneToOne 
-	private User user;
+	
 	
 }

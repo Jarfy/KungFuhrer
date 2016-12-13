@@ -50,7 +50,6 @@ public class VoteTest extends SQLBasedTest {
 				v.persist(vo);
 		});*/
 		vo.setEmail("mmmmmmmm");
-		vo.setIdproduction(2);
 		vo.setRating(1);		
 		
 		Statement statement = jdbcConnection.createStatement();

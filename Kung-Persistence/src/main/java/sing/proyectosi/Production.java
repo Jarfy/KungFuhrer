@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import javax.persistence.Table;
@@ -34,9 +35,11 @@ public class Production {
 	private int totalSeason;
 	private int episode;
 	
-	@OneToMany
+	@OneToMany(mappedBy="production")
 	private Set<Vote> votes = new HashSet<>();
 	
+	@ManyToMany(mappedBy="productions")	
+	private Set<Persons> persons = new HashSet<>();
 		
 	public int getIdProduction() {
 		return idProduction;
@@ -123,29 +126,5 @@ public class Production {
 		this.episode = episode;
 	}
 
-		
-	//vote
-	
-	//vote
-	
-		public Set<Vote> getVote() {
-			return Collections.unmodifiableSet(votes);
-		}
-
-		public void addVote(Vote vote) {
-			vote.setProduction(this);
-		}
-		
-		public void removeVote(Vote vote) {
-			vote.setProduction(null);
-		}
-		
-		void internalRemoveVote(Vote vote) {
-			this.votes.remove(vote);
-		}
-
-		void internalAddVote(Vote vote) {
-			this.votes.add(vote);
-		}
 	
 }

@@ -15,16 +15,14 @@ public class Vote {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idVoto;		
-	private int idProduction;
-	private String email;
 	private int rating;
 	
 	@ManyToOne
-	@JoinColumn(name="email")
+	@JoinColumn(name="email_user")
 	private User user;
 	
 	@ManyToOne
-	@JoinColumn(name="idproduction")
+	@JoinColumn(name="idProduction")
 	private Production production;
 	
 	//constructor
@@ -36,16 +34,14 @@ public class Vote {
 	}
 	
 	public int getIdproduction() {
-		return idProduction;
+		return production.getIdProduction();
 	}
-	public void setIdproduction(int idproduction) {
-		this.idProduction = idproduction;
-	}
+
 	public String getEmail() {
-		return email;
+		return user.getEmail();
 	}
 	public void setEmail(String email) {
-		this.email = email;
+		this.user.setEmail(email); 
 	}
 	public int getRating() {
 		return rating;
@@ -55,40 +51,7 @@ public class Vote {
 	}
 
 	
-	//useer
-	public void setUser(User d) {
-		if (this.user != null) {
-			this.user.internalRemoveVote(this);
-		}
-		
-		this.user = d;
-		
-		if (this.user != null) {
-			this.user.internalAddVote(this);
-		}
-	}
 
-	public User getUser() {
-		return this.user;
-	}
-	
-	//production
-	//useer
-		public void setProduction(Production  d) {
-			if (this.production != null) {
-				this.production.internalRemoveVote(this);
-			}
-			
-			this.production = d;
-			
-			if (this.production != null) {
-				this.production.internalAddVote(this);
-			}
-		}
-
-		public Production getProduction() {
-			return this.production;
-		}
 
 	
 }

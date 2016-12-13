@@ -1,6 +1,5 @@
 package sing.proyectosi;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -18,14 +18,16 @@ public class User {
 	@Id
 	@Column(name = "email")
 	private String email; 
+	
 	private String name;
 	private String lastName;
 	private String password;
 	
-	@OneToMany
+	@OneToMany(mappedBy="user")
 	private Set<Vote> votes = new HashSet<>();
 
 	@OneToOne
+	@PrimaryKeyJoinColumn
 	private UserAccess userAccess;
 	
 	public String getEmail() {
@@ -53,27 +55,6 @@ public class User {
 		this.password = password;
 	}
 
-	//vote
-	
-	public Set<Vote> getVote() {
-		return Collections.unmodifiableSet(votes);
-	}
-
-	public void addVote(Vote vote) {
-		vote.setUser(this);
-	}
-	
-	public void removeVote(Vote vote) {
-		vote.setUser(null);
-	}
-	
-	void internalRemoveVote(Vote vote) {
-		this.votes.remove(vote);
-	}
-
-	void internalAddVote(Vote vote) {
-		this.votes.add(vote);
-	}
 	
 	
 }
