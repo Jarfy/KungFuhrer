@@ -7,8 +7,6 @@ import static sing.proyectosi.TransactionUtils.doTransaction;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManagerFactory;
@@ -36,6 +34,7 @@ public class ProductionTest extends SQLBasedTest {
 	@After
 	public void renewConnectionAfterTest() throws ClassNotFoundException, SQLException {
 		super.renewConnection();
+			
 	}
 	
 	
@@ -167,7 +166,6 @@ public class ProductionTest extends SQLBasedTest {
 		
 		assertEquals(0, rs.getInt("total"));
 	}
-	/*
 	
 	@Test
 	public void testListProduction() throws SQLException {
@@ -225,6 +223,6 @@ public class ProductionTest extends SQLBasedTest {
 		assertEquals("prueba para listar 2", produc.get(1).getTitle());
 	}
 	
-	*/
+	
 
 }

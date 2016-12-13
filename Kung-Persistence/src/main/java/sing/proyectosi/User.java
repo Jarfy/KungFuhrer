@@ -54,7 +54,20 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
 	
+
+	//metodos relaciones
+	public Set<Vote> getVotes() {
+		return votes;
+	}
+	public void setVotes(Set<Vote> votes) {
+		this.votes = votes;
+	}
+	public UserAccess getUserAccess() {
+		return userAccess;
+	}
+	public void setUserAccess(UserAccess userAccess) {
+		this.userAccess = userAccess;
+	}
 	
 }

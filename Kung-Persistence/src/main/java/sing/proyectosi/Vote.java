@@ -25,10 +25,6 @@ public class Vote {
 	@JoinColumn(name="idProduction")
 	private Production production;
 	
-	//constructor
-	public Vote(){	}
-	
-	
 	public int getIdVoto() {
 		return idVoto;
 	}
@@ -36,18 +32,41 @@ public class Vote {
 	public int getIdproduction() {
 		return production.getIdProduction();
 	}
+	
 
 	public String getEmail() {
 		return user.getEmail();
-	}
+	}	
+	/*
 	public void setEmail(String email) {
 		this.user.setEmail(email); 
-	}
+	}*/
+		
 	public int getRating() {
 		return rating;
 	}
 	public void setRating(int rating) {
 		this.rating = rating;
+	}
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
+	public Production getProduction() {
+		return production;
+	}
+
+
+	public void setProduction(Production production) {
+		this.production = production;
 	}
 
 	

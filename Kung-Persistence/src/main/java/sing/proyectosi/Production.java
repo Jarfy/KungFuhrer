@@ -126,5 +126,35 @@ public class Production {
 		this.episode = episode;
 	}
 
+
+	public String getReleased() {
+		return released;
+	}
+
+
+	public void setReleased(String released) {
+		this.released = released;
+	}
+
+	
+	//metodos de relaciones
+	public Set<Vote> getVotes() {
+		return votes;
+	}
+
+
+	public void setVotes(Set<Vote> votes) {
+		this.votes = votes;
+	}
+
+
+	public Set<Persons> getPersons() {
+		return persons;
+	}
+
+
+	public void setPersons(Set<Persons> persons) {
+		this.persons = persons;
+	}
 	
 }
