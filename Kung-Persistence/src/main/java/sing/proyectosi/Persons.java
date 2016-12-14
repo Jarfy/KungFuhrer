@@ -3,7 +3,9 @@ package sing.proyectosi;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,7 +26,7 @@ public class Persons {
 	private String lastName;
 
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	@JoinTable(name="Person_Production", joinColumns={@JoinColumn(name="idPerson")}, inverseJoinColumns={@JoinColumn(name="idProduction")})
 	private Set<Production> productions = new HashSet<>();
 

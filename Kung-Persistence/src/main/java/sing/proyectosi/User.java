@@ -3,8 +3,10 @@ package sing.proyectosi;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -23,7 +25,7 @@ public class User {
 	private String lastName;
 	private String password;
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private Set<Vote> votes = new HashSet<>();
 
 	@OneToOne

@@ -1,6 +1,8 @@
 package sing.proyectosi;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,11 +19,12 @@ public class Vote {
 	private int idVoto;		
 	private int rating;
 	
-	@ManyToOne
+	//@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@ManyToOne()
 	@JoinColumn(name="email_user")
 	private User user;
 	
-	@ManyToOne
+	@ManyToOne()
 	@JoinColumn(name="idProduction")
 	private Production production;
 	

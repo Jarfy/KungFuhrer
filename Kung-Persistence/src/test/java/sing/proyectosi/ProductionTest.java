@@ -54,26 +54,7 @@ public class ProductionTest extends SQLBasedTest {
 				pro.setType("serie");
 				pro.setYear(null);
 				p.persist(pro);
-		});
-		/*pro.setTitle("serie muerte 1");
-		pro.setEpisode(1);
-		pro.setGenre("destruccion");
-		pro.setLanguaje("arameo");
-		pro.setPlot("resumen de como destruyo el mundo con el metal de fondo");
-		pro.setRelease("6666");
-		pro.setRuntime(666);
-		pro.setTotalSeason(6);
-		pro.setType("serie");
-		pro.setYear(null);
-		
-		Statement statement = jdbcConnection.createStatement();
-		int id = statement.executeUpdate(
-				"INSERT INTO Production(title,year,genre,released,runtime,plot,languaje,type,totalSeason,episode) "
-				+ "values('"+pro.getTitle() + "," + pro.getYear() + "," +pro.getGenre() + "," +pro.getRelease() +
-				"," + pro.getRuntime()+"," + pro.getPlot()+"," + pro.getLanguaje()+ "," + pro.getType()+ 
-				"," + pro.getTotalSeason()+ "," +  pro.getEpisode()+"')", 
-				Statement.RETURN_GENERATED_KEYS);*/
-		
+		});		
 			
 		ResultSet rs = statement.executeQuery(
 				"SELECT COUNT(*) as total FROM Production WHERE idproduction = "+pro.getIdProduction());
