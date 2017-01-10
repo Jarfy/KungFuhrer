@@ -18,7 +18,9 @@ public class Vote {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idVoto;		
 	private int rating;
-	
+	private int idProduction;
+	private int idUser;
+
 	//@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	@ManyToOne()
 	@JoinColumn(name="email_user")
@@ -62,6 +64,22 @@ public class Vote {
 		this.user = user;
 	}
 
+	
+	public int getIdProduction() {
+		return idProduction;
+	}
+
+	public void setIdProduction(int idProduction) {
+		this.idProduction = idProduction;
+	}
+	
+	public int getIdUser() {
+		return idUser;
+	}
+
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
+	}
 
 	public Production getProduction() {
 		return production;
