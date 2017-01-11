@@ -1,4 +1,4 @@
-package sing.kung.webapp.utilities;
+package sing.kung.webapp;
 
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -38,7 +38,7 @@ public class VoteVM {
 	public void newVote() {
 		this.currentVote = new Vote();
 	}
-	
+	/*
 	@Command
 	@NotifyChange({"rating", "idUser", "idProduction"})
 	public void save() {
@@ -59,7 +59,7 @@ public class VoteVM {
 		this.idProduction = 0;
 		this.idUser = 0;		
 	}
-	
+	*/
 	
 	@Command
 	@NotifyChange("votes")

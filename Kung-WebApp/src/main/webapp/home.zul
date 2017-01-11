@@ -1,0 +1,41 @@
+ <?init class="org.zkoss.zk.ui.util.Composition" arg0="userMenuTemplate.zul"?>  
+<!-- Basic Info -->
+<zk> 
+    <window self="@{define(left)}" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('sing.kung.webapp.ProductionVM')" title="Best productions" border="normal" width="100%" height="330px">
+     
+	<!--
+		<window title="Department Editor" border="normal" mode="modal" visible="@load(vm.currentProduction ne null)">
+			Name: <textbox value="@load(vm.currentProduction.title) @save(vm.currentProduction.title, before='save')" />
+			
+			<hbox>
+				
+				<button label="save" onClick="@command('save')"/>
+				<button label="cancel" onClick="@command('cancel')"/>
+			</hbox>
+		
+		</window>
+		-->
+		
+
+			<listbox model="@load(vm.productions)">
+				<listhead>
+					<listheader label="title"/>
+					<listheader label="actions"/>
+				</listhead>
+				<template title="model">
+					<listitem>
+						<listcell><label value="@load(each.title)"></label></listcell>
+						<listcell>
+							<button label="delete" onClick="@command('delete', d=each)"/>
+							<button label="edit" onClick="@command('edit', d=each)"/>
+						
+						</listcell>					
+					</listitem>
+				</template>
+				
+			</listbox>
+	
+
+        
+    </window>
+</zk>

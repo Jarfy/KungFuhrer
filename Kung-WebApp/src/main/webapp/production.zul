@@ -1,0 +1,26 @@
+ <?init class="org.zkoss.zk.ui.util.Composition" arg0="userMenuTemplate.zul"?>  
+<zk>
+
+<borderlayout self="@{define(left)}" width="100%" height="330px">
+
+	<east width="200px"  title="Menu de edicion">
+                    
+    </east>
+	<center>
+         <window title="Production description" border="normal" width="100%" height="330px">
+       
+        <hbox xmlns:n="native" >
+            <vlayout>
+            <n:h3>Lista de pelis!</n:h3> 
+            </vlayout>
+        </hbox>
+        
+        
+    	</window>         
+                    
+	</center>
+
+</borderlayout>
+
+
+</zk>

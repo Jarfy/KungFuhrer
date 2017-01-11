@@ -1,4 +1,4 @@
-package sing.kung.webapp.utilities;
+package sing.kung.webapp;
 
 import java.util.List;
 import javax.persistence.EntityManager;

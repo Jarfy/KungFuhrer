@@ -1,0 +1,18 @@
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="template.zul"?>
+<zk>
+
+<!-- No login -->
+
+	<toolbarbutton  self="@{define(userMenu)}" label="Login" />
+    <toolbarbutton  self="@{define(userMenu)}" label="Register" />
+    
+<!-- Employee/Admin Login -->
+	<toolbarbutton  self="@{define(userMenu)}" label="List user" />
+
+<!-- Basic Login -->
+
+	<toolbarbutton  self="@{define(userMenu)}" label="Profile" />
+    <toolbarbutton  self="@{define(userMenu)}" label="Logout" />
+
+	
+</zk>

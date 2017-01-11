@@ -1,0 +1,34 @@
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="template.zul"?>
+<zk>
+    <!-- Product  -->
+     
+    <window self="@{define(left)}" title="Best productions" border="normal" width="100%" height="330px">
+       
+        <hbox xmlns:n="native" >
+            <vlayout>
+            <n:h3>Lista de pelis!</n:h3> 
+            </vlayout>
+        </hbox>
+    </window>
+ 
+    <!-- Sidebar  -->
+    
+    <div self="@{define(right)}" width="100%" xmlns:n="native">
+        
+        <n:ul>
+            <n:li>
+                <a href="http://www.zkoss.org/product/zk">Product Detail</a>
+            </n:li>
+        </n:ul>
+        <groupbox mold="3d" width="200px" closable="false">
+            <caption label="Calendar"></caption>
+            <calendar width="180px" />
+        </groupbox>
+    </div>
+ 
+  <!-- Toolbar  -->
+  
+ 	<toolbarbutton self="@{define(userMenu)}" label="Login" />
+    <toolbarbutton self="@{define(userMenu)}" label="Register" />
+ 
+</zk>

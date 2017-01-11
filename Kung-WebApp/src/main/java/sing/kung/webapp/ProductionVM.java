@@ -1,4 +1,4 @@
-package sing.kung.webapp.utilities;
+package sing.kung.webapp;
 
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -25,12 +25,12 @@ public class ProductionVM {
 	
 	public List<Production> getProductions() {
 		EntityManager em = DesktopEntityManagerManager.getDesktopEntityManager();
-		return em.createQuery("SELECT * FROM Production", Production.class).getResultList();
+		return em.createQuery("select p FROM Production p", Production.class).getResultList();
 	}
 
 	
 	@Command
-	@NotifyChange("production")
+	@NotifyChange("productions")
 	public void delete(@BindingParam("e") Production production) {
 		EntityManager em = DesktopEntityManagerManager.getDesktopEntityManager();
 		TransactionUtils.doTransaction(em, __ -> {
@@ -46,7 +46,7 @@ public class ProductionVM {
 	
 	
 	@Command
-	@NotifyChange({"producitons", "currentProduction"})
+	@NotifyChange({"productions", "currentProduction"})
 	public void save() {
 		EntityManager em = DesktopEntityManagerManager.getDesktopEntityManager();
 		TransactionUtils.doTransaction(em, __ -> {
