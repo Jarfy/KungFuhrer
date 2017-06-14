@@ -16,15 +16,15 @@
 		</window>
 		-->
 		
-
-			<listbox model="@load(vm.productions)">
+		<hbox>
+		<listbox model="@load(vm.productions)">
 				<listhead>
 					<listheader label="title"/>
 					<listheader label="actions"/>
 				</listhead>
-				<template title="model">
+				<template title="model" name="model">
 					<listitem>
-						<listcell><label value="@load(each.title)"></label></listcell>
+						<listcell><label value="@load(each.title)"/></listcell>
 						<listcell>
 							<button label="delete" onClick="@command('delete', d=each)"/>
 							<button label="edit" onClick="@command('edit', d=each)"/>
@@ -34,6 +34,8 @@
 				</template>
 				
 			</listbox>
+		</hbox>
+			
 	
 
         

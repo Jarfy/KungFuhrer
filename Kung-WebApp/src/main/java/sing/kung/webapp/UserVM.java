@@ -27,7 +27,7 @@ public class UserVM {
 	
 	public List<User> getUser() {
 		EntityManager em = DesktopEntityManagerManager.getDesktopEntityManager();
-		return em.createQuery("SELECT * FROM user", User.class).getResultList();
+		return em.createQuery("SELECT u FROM User u", User.class).getResultList();
 	}
 
 	

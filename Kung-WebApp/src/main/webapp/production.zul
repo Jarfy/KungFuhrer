@@ -1,26 +1,74 @@
  <?init class="org.zkoss.zk.ui.util.Composition" arg0="userMenuTemplate.zul"?>  
-<zk>
+<!-- Basic Info -->
+<zk> 
+    <window self="@{define(left)}" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('sing.kung.webapp.ProductionVM')" title="Best productions" border="normal" width="100%" height="330px">
+     		
+		<window title="Production Detail" border="normal" mode="modal" visible="@load(vm.currentProduction ne null)">
+		
+		
+			<grid width="400px" height="350px">
+				<rows >
+					<row>
+						Production: <textbox value="@load(vm.currentProduction.title) @save(vm.currentProduction.title, before='save')" />
+					</row>
+					<row>
+						Genre: <textbox value="@load(vm.currentProduction.genre) @save(vm.currentProduction.genre, before='save')" />
+					</row>
+					<row >
+						Year: <textbox value="@load(vm.currentProduction.year) @save(vm.currentProduction.year, before='save')" />
+					</row>
+					<row>
+						Released: <textbox value="@load(vm.currentProduction.released) @save(vm.currentProduction.released, before='save')" />
+					</row>
+					<row>
+						Runtime: <textbox value="@load(vm.currentProduction.runtime) @save(vm.currentProduction.runtime, before='save')" />
+					</row>
+					<row>
+						Plot: <textbox value="@load(vm.currentProduction.plot) @save(vm.currentProduction.plot, before='save')" />
+					</row>
+					<row>
+						Language: <textbox value="@load(vm.currentProduction.languaje) @save(vm.currentProduction.languaje, before='save')" />
+					</row>
+					<row>
+						Type: <textbox value="@load(vm.currentProduction.type) @save(vm.currentProduction.type, before='save')" />
+					</row>
+					<row>
+						Total seasons: <textbox value="@load(vm.currentProduction.totalSeason) @save(vm.currentProduction.totalSeason, before='save')" />
+					</row>
+					<row>
+						Episode: <textbox value="@load(vm.currentProduction.episode) @save(vm.currentProduction.episode, before='save')" />
+					</row>
+				</rows>				
+			</grid>
+	
+			<hbox>	
+				<button label="Save" onClick="@command('save')"/>
+				<button label="Close" onClick="@command('cancel')"/>
+			</hbox>
+		
+		</window>
+		
+		
+		<groupbox mold="3d" closable="false">
+			<listbox model="@load(vm.productions)">
+				<listhead>
+					<listheader label="Production"/>
+					<listheader label="Actions"/>
+				</listhead>
+				<template name="model">
+					<listitem>
+						<listcell><label value="@load(each.title)"></label></listcell>
+						<listcell>
+							<button label="Delete" onClick="@command('delete', e=each)"/>						
+							<button label="Edit" onClick="@command('edit', e=each)"/>
+						</listcell>					
+					</listitem>
+				</template>
+				
+			</listbox>
+		
+		</groupbox>		
 
-<borderlayout self="@{define(left)}" width="100%" height="330px">
-
-	<east width="200px"  title="Menu de edicion">
-                    
-    </east>
-	<center>
-         <window title="Production description" border="normal" width="100%" height="330px">
-       
-        <hbox xmlns:n="native" >
-            <vlayout>
-            <n:h3>Lista de pelis!</n:h3> 
-            </vlayout>
-        </hbox>
         
-        
-    	</window>         
-                    
-	</center>
-
-</borderlayout>
-
-
+    </window>
 </zk>

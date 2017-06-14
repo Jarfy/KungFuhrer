@@ -7,7 +7,6 @@ import static sing.proyectosi.TransactionUtils.doTransaction;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -18,24 +17,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class VoteTest extends SQLBasedTest {
-	
-	class MiObjeto{
-		
-		private int idPro;
-		private String iduser;
-		private int idVote;
-		
-		
-		private MiObjeto( ){}
-		
-		private MiObjeto(int idPro,String iduser,int idVote ){
-			this.idPro = idPro;
-			this.iduser = iduser;
-			this.idVote = idVote;
-		
-		}
-	
-	}
 	
 	private static EntityManagerFactory emf;
 	
@@ -57,19 +38,17 @@ public class VoteTest extends SQLBasedTest {
 	public void renewConnectionAfterTest() throws ClassNotFoundException, SQLException {	
 		//jdbcConnection.setAutoCommit(false);
 		//jdbcConnection.rollback();
-		super.renewConnection();
-		
+		super.renewConnection();		
 	}
 	
-	private MiObjeto crearEntidades() throws SQLException {
-		
+	@Test
+	public void tesCrearVoteRelacion() throws SQLException {		
 		final Vote vo = new Vote();
 		final Production pro = new Production();	
-		final User user = new User();
+		final User user = new User();		
 		
+		Statement statement= jdbcConnection.createStatement();
 		
-		
-		Statement statPro= jdbcConnection.createStatement();
 		doTransaction(emf, p -> {
 				pro.setTitle("prueba de insertar");
 				pro.setEpisode(1);
@@ -84,132 +63,158 @@ public class VoteTest extends SQLBasedTest {
 				p.persist(pro);
 		});
 		
-		int idPro = statPro.RETURN_GENERATED_KEYS;	
+		
+		statement = jdbcConnection.createStatement();
+		ResultSet resultado = statement.executeQuery(
+				"SELECT count(*) as total FROM Production WHERE idProduction = "+ pro.getIdProduction());
+		resultado.next();
 		
 		
-		Statement statUser = jdbcConnection.createStatement();
+		assertEquals(1, resultado.getInt("total"));
+		
 		doTransaction(emf, u -> {			
-			    user.setEmail("email@email.com");	
-			    user.setLastName("prueba");
-			    user.setName("probeta");
-			    user.setPassword("buah"); 
-				u.persist(user);
+		    user.setEmail("email@email.com");	
+		    user.setLastName("prueba");
+		    user.setName("probeta");
+		    user.setPassword("buah"); 
+			u.persist(user);
 		});
-		String idUser = user.getEmail();
+		
+		resultado  = statement.executeQuery(
+				"SELECT count(*) as total FROM user WHERE email = '" + user.getEmail() +"'");
+		resultado.next();
 		
 		
-		Statement statVote = jdbcConnection.createStatement();
+		assertEquals(1, resultado.getInt("total"));
+		
 		doTransaction(emf, v -> {			
 			vo.setProduction( pro);
 			vo.setRating(1);		
 			vo.setUser( user);
 			v.persist(vo);
 	    });
-		int idVote= statVote.RETURN_GENERATED_KEYS;	
 		
 		
 		
+		resultado  = statement.executeQuery(
+				"SELECT count(*) as total FROM vote WHERE idVoto = " + vo.getIdVoto() + " and email_user = '" + user.getEmail() + "' and idProduction = "+ pro.getIdProduction());
+		resultado.next();
 		
-		final MiObjeto miObj = new MiObjeto(idPro,idUser,idVote);
+		assertEquals(1, resultado.getInt("total"));
 		
-		return  miObj;
-	}
+	} 
+	
+	@Test
+	public void tesUpdateVote() throws SQLException {		
+		final Vote vo = new Vote();
+		final Production pro = new Production();	
+		final User user = new User();		
+		
+		Statement statement= jdbcConnection.createStatement();
+		
+		doTransaction(emf, p -> {
+				pro.setTitle("prueba de insertar");
+				pro.setEpisode(1);
+				pro.setGenre("destruccion");
+				pro.setLanguaje("arameo");
+				pro.setPlot("resumen de como destruyo el mundo con el metal de fondo");
+				pro.setRelease("6666");
+				pro.setRuntime(666);
+				pro.setTotalSeason(6);
+				pro.setType("serie");
+				pro.setYear(null);
+				p.persist(pro);
+		});
+		
+		
+		statement = jdbcConnection.createStatement();
+		ResultSet resultado = statement.executeQuery(
+				"SELECT count(*) as total FROM Production WHERE idProduction = "+ pro.getIdProduction());
+		resultado.next();
+		
+		doTransaction(emf, u -> {			
+		    user.setEmail("prueba@email.com");	
+		    user.setLastName("prueba");
+		    user.setName("probeta");
+		    user.setPassword("buah"); 
+			u.persist(user);
+		});
+		
+		resultado  = statement.executeQuery(
+				"SELECT count(*) as total FROM user WHERE email = '" + user.getEmail() +"'");
+		resultado.next();
+		
+		doTransaction(emf, v -> {			
+			vo.setProduction( pro);
+			vo.setRating(1);		
+			vo.setUser( user);
+			v.persist(vo);
+	    });
+				
+		resultado  = statement.executeQuery(
+				"SELECT count(*) as total FROM vote WHERE idVoto = " + vo.getIdVoto() + " and email_user = '" + user.getEmail() + "' and idProduction = "+ pro.getIdProduction());
+		resultado.next();		
+		
+		doTransaction(emf, em -> {
+			Vote e = em.find(Vote.class, vo.getIdVoto());
+			e.setRating(999);			
+		});
+		
+		resultado = statement.executeQuery(
+				"SELECT * FROM vote WHERE idvoto = "+  vo.getIdVoto());
+		resultado.next();
+		
+		assertEquals("999", resultado.getString("rating"));
+		
+	} 
 	
 	
-//	@Test
-//	public void testCreateVoto() throws SQLException {
-//		final MiObjeto miobj = this.crearEntidades();	
-//	
-//	
-//		Statement statement = jdbcConnection.createStatement();
-//		ResultSet rs = statement.executeQuery(
-//				"SELECT COUNT(*) as total FROM vote WHERE idvoto = " + miobj.idVote);
-//		rs.next();
-//		
-//		assertEquals(1, rs.getInt("total"));
-//
-//	}
+	@Test
+	public void testCreateVote() throws SQLException {		
+		final Vote vo = new Vote();	
+		
+		Statement statement= jdbcConnection.createStatement();
+		
+		doTransaction(emf, v -> {			
+			vo.setProduction( null);
+			vo.setRating(1);		
+			vo.setUser( null);
+			v.persist(vo);
+	    });
+				
+		ResultSet resultado  = statement.executeQuery(
+				"SELECT count(*) as total FROM vote WHERE idVoto = " + vo.getIdVoto() );
+		resultado.next();			
+		
+		
+		assertEquals(1, resultado.getInt("total"));
+		
+	} 
 	
-	
-//	@Test
-//	public void testDeleteVote() throws SQLException {
-//		
-//		final MiObjeto miobj = this.crearEntidades();
-//		
-//		
-//		doTransaction(emf, em -> {
-//			Production e = em.find(Production.class,miobj.idPro );
-//			em.remove(e);
-//		});
-//		System.out.println("idpro: " + miobj.idPro);
-//		
-//		doTransaction(emf, use -> {
-//			User us = use.find(User.class, miobj.iduser);
-//			use.remove(us);
-//		});
-//		//System.out.println("idUser: " + idUser);
-//		
-//		
-//		/*doTransaction(emf, emv -> {		
-//			Vote vot = emv.find(Vote.class, idVote);
-//			emv.remove(vot);
-//		});
-//		System.out.println("idVote: " + idVote);*/
-//		
-//		//check
-//		Statement statement1 = jdbcConnection.createStatement();
-//		statement1 = jdbcConnection.createStatement();
-//		ResultSet rs1 = statement1.executeQuery(
-//				"SELECT COUNT(*) as total FROM Production WHERE idproduction = "+ miobj.idPro);
-//		rs1.next();
-//		
-//		Statement statement2 = jdbcConnection.createStatement();
-//		statement2 = jdbcConnection.createStatement();
-//		ResultSet rs2 = statement2.executeQuery(
-//				"SELECT COUNT(*) as total FROM vote WHERE idvoto = "+ miobj.idVote);
-//		rs2.next();
-//		
-//		Statement statement3 = jdbcConnection.createStatement();
-//		statement3 = jdbcConnection.createStatement();
-//		ResultSet rs3 = statement3.executeQuery(
-//				"SELECT COUNT(*) as total FROM user WHERE email = '"+ miobj.iduser +"'");
-//		rs3.next();
-//		
-//		assertEquals(0, rs1.getInt("total"));
-//		assertEquals(0, rs2.getInt("total"));
-//		assertEquals(0, rs3.getInt("total"));
-//	}
-	
-	
-//	@Test
-//	public void testUpdateVote() throws SQLException {
-//		
-//		final MiObjeto miObj = this.crearEntidades();
-//		
-//		doTransaction(emf, em -> {
-//			Vote e = em.find(Vote.class, miObj.idVote);
-//			e.setRating(22);			
-//		});
-//		
-//		//check
-//		Statement statement = jdbcConnection.createStatement();
-//		statement = jdbcConnection.createStatement();
-//		ResultSet rs = statement.executeQuery(
-//				"SELECT * FROM vote WHERE idvoto = "+miObj.idVote);
-//		rs.next();
-//		
-//		assertEquals("22", rs.getString("rating"));
-//		
-//		
-//	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@Test
+	public void testDeleteVote() throws SQLException {		
+		final Vote vo = new Vote();	
+		
+		Statement statement= jdbcConnection.createStatement();
+		
+		doTransaction(emf, v -> {			
+			vo.setProduction( null);
+			vo.setRating(1);		
+			vo.setUser( null);
+			v.persist(vo);
+	    });	
+		
+		doTransaction(emf, em -> {
+			Vote vote = em.find(Vote.class, vo.getIdVoto());
+			em.remove(vote);
+		});
+		
+		ResultSet resultado = statement.executeQuery(
+				"SELECT COUNT(*) as total FROM vote WHERE idVoto = " + vo.getIdVoto());
+		resultado.next();		
+		
+		assertEquals(0, resultado.getInt("total"));
+		
+	} 
 
 }

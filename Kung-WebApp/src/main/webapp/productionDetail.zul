@@ -1,0 +1,20 @@
+<?page title="Production Detail" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window self="@{define(left)}" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('sing.kung.webapp.ProductionVM')" title="Best productions" border="normal" width="100%" height="330px">
+     		
+		
+		<window title="Production Editor" border="normal" mode="modal" visible="@load(vm.currentProduction ne null)">
+			Name: <textbox value="@load(vm.currentProduction.title) " />
+			
+			
+			<hbox>
+				
+				<button label="holaaaaaaaaaaaaa" />
+			
+			</hbox>
+		
+		</window>
+		
+		
+</window>
+</zk>

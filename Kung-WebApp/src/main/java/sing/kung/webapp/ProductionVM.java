@@ -10,7 +10,8 @@ import sing.proyectosi.TransactionUtils;
 import sing.kung.webapp.utilities.DesktopEntityManagerManager;
 
 public class ProductionVM {
-
+	
+	
 	public ProductionVM() {
 		// TODO Auto-generated constructor stub
 	}	
@@ -64,6 +65,13 @@ public class ProductionVM {
 	@Command
 	@NotifyChange("currentProduction")
 	public void edit(@BindingParam("e") Production production) {
+		this.currentProduction = production;
+	}
+	
+	
+	@Command
+	@NotifyChange("currentProduction")
+	public void productionDetail(@BindingParam("e") Production production) {
 		this.currentProduction = production;
 	}
 	

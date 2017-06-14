@@ -1,0 +1,49 @@
+ <?init class="org.zkoss.zk.ui.util.Composition" arg0="userMenuTemplate.zul"?>  
+<!-- Basic Info -->
+<zk> 
+    <window self="@{define(left)}" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('sing.kung.webapp.PersonsVM')" title="Best productions" border="normal" width="100%" height="330px">
+     		
+		<window title="Person Detail" border="normal" mode="modal" visible="@load(vm.currentPerson ne null)">	
+		
+			<grid width="400px" height="350px">
+				<rows >
+					<row>
+						Name: <textbox value="@load(vm.currentPerson.name) @save(vm.currentPerson.name, before='save')" />
+					</row>
+					<row>
+						Last Name: <textbox value="@load(vm.currentPerson.lastName) @save(vm.currentPerson.lastName, before='save')" />
+					</row>					
+				</rows>				
+			</grid>
+	
+			<hbox>	
+				<button label="Save" onClick="@command('save')"/>
+				<button label="Cancel" onClick="@command('cancel')"/>
+			</hbox>
+		
+		</window>
+		
+		
+		<groupbox mold="3d" closable="false">
+			<listbox model="@load(vm.persons)">
+				<listhead>
+					<listheader label="Persons"/>
+					<listheader label="Actions"/>
+				</listhead>
+				<template name="model">
+					<listitem>
+						<listcell><label value="@load(each.name)"></label> <label value="@load(each.lastName)"></label></listcell>
+						<listcell>
+							<button label="Delete" onClick="@command('delete', e=each)"/>	
+							<button label="Edit" onClick="@command('edit', e=each)"/>					
+						</listcell>					
+					</listitem>
+				</template>
+				
+			</listbox>
+		
+		</groupbox>		
+
+        
+    </window>
+</zk>

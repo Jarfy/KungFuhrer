@@ -199,9 +199,9 @@ public class ProductionTest extends SQLBasedTest {
 			.getResultList();
 		
 		//check
-		assertEquals(2, produc.size());
-		assertEquals("prueba para listar 1", produc.get(0).getTitle());
-		assertEquals("prueba para listar 2", produc.get(1).getTitle());
+		assertEquals(3, produc.size());
+		assertEquals("prueba para listar 1", produc.get(1).getTitle());
+		assertEquals("prueba para listar 2", produc.get(2).getTitle());
 	}
 	
 	

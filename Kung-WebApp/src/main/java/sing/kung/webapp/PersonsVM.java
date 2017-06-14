@@ -6,7 +6,6 @@ import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
 import sing.proyectosi.Persons;
-import sing.proyectosi.Production;
 import sing.proyectosi.TransactionUtils;
 import sing.kung.webapp.utilities.DesktopEntityManagerManager;
 
@@ -27,9 +26,8 @@ public class PersonsVM {
 	
 	public List<Persons> getPersons() {
 		EntityManager em = DesktopEntityManagerManager.getDesktopEntityManager();
-		return em.createQuery("SELECT * FROM persons", Persons.class).getResultList();
+		return em.createQuery("SELECT p FROM Persons p ", Persons.class).getResultList();
 	}
-
 	
 	@Command
 	@NotifyChange("persons")
@@ -66,6 +64,12 @@ public class PersonsVM {
 	@Command
 	@NotifyChange("currentPerson")
 	public void edit(@BindingParam("e") Persons persons) {
+		this.currentPerson = persons;
+	}
+	
+	@Command
+	@NotifyChange("currentPerson")
+	public void personDetail(@BindingParam("e") Persons persons) {
 		this.currentPerson = persons;
 	}
 }
