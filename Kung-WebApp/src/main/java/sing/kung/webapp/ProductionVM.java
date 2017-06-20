@@ -75,6 +75,24 @@ public class ProductionVM {
 		this.currentProduction = production;
 	}
 	
+	//funcion buscador simple
+		public List<Production> getSearchSimple(String ptitle, String pGenre, String pLanguaje, String pType ) {
+			EntityManager em = DesktopEntityManagerManager.getDesktopEntityManager();
+			return em.createQuery("select p FROM Production p where title like :title", Production.class)
+					.setParameter("title", "'%" + ptitle + "%'")				
+					.getResultList();
+		}
+	
+	//funcion buscador  avanzado
+	public List<Production> getSearchAdvanced(String ptitle, String pGenre, String pLanguaje, String pType ) {
+		EntityManager em = DesktopEntityManagerManager.getDesktopEntityManager();
+		return em.createQuery("select p FROM Production p where title like :title or genre like :genre or languaje like :languaje or type like :type", Production.class)
+				.setParameter("title", "'%" + ptitle + "%'")
+				.setParameter("genre", "'%" + pGenre + "%'")
+				.setParameter("languaje", "'%" + pLanguaje + "%'")
+				.setParameter("type", "'%" + pType + "%'")
+				.getResultList();
+	}
 
 }
 
